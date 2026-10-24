@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Glow Globe</title>
+  <meta name="description" content="빛나는 위치 마커가 있는 인터랙티브 3D 지구본" />
+  <link rel="stylesheet" href="./style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/three.module.min.js",
+        "three/addons/": "./vendor/three/addons/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <canvas id="scene" aria-label="회전하는 3D 지구본"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div id="labels" class="labels" aria-hidden="true"></div>
+
+  <header class="brand">
+    <span class="brand__dot" aria-hidden="true"></span>
+    <div>
+      <h1>Glow Globe</h1>
+      <p>세계의 빛나는 장소들</p>
+    </div>
+  </header>
+
+  <aside class="panel" id="panel">
+    <button class="panel__toggle" id="panelToggle" aria-expanded="true" aria-controls="placeList">
+      <span>추천 위치</span>
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <ul class="panel__list" id="placeList"></ul>
+  </aside>
+
+  <section class="card" id="card" aria-live="polite" hidden>
+    <button class="card__close" id="cardClose" aria-label="전체 보기로 돌아가기">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <p class="card__eyebrow" id="cardCountry"></p>
+    <h2 class="card__title" id="cardTitle"></h2>
+    <p class="card__desc" id="cardDesc"></p>
+    <dl class="card__meta">
+      <div><dt>현지 시각</dt><dd id="cardTime"></dd></div>
+      <div><dt>좌표</dt><dd id="cardCoords"></dd></div>
+    </dl>
+    <div class="card__nav">
+      <button id="prevBtn" aria-label="이전 위치">← 이전</button>
+      <button id="nextBtn" aria-label="다음 위치">다음 →</button>
+    </div>
+  </section>
+
+  <footer class="hud">
+    <button class="pill" id="rotateToggle" aria-pressed="true">
+      <span class="pill__dot" aria-hidden="true"></span>
+      <span id="rotateLabel">자동 회전</span>
+    </button>
+    <p class="hint">드래그로 회전 · 스크롤로 확대 · 마커를 클릭해 이동</p>
+  </footer>
+
+  <div class="loader" id="loader">
+    <div class="loader__ring" aria-hidden="true"></div>
+    <p>지구를 불러오는 중…</p>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
